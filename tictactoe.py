@@ -61,24 +61,27 @@ pygame.draw.line(screen, (0, 0, 0),
 
  """
 
-# ----- Draw labels at the top left of each cell -----
+""" Draw labels at the top left of each cell """
+
+
 def drawLabels(screen):
     labels = []
     for i in range(1, 10):
         font = pygame.font.Font(None, 30)
-        labels.append(font.render(str(i), 1, (10,10,10)))
-    
+        labels.append(font.render(str(i), 1, (10, 10, 10)))
+
     for i in range(3):
         for j in range(3):
             x = (i * 200) + 5
             y = (j * 200) + 5
-            # pygame.Surface.fill(color, rect=None, special_flags=0) 
+            # pygame.Surface.fill(color, rect=None, special_flags=0)
             screen.fill((250, 250, 250), (x, y, 20, 30))
-            # pygame.Surface.blit(source, dest, area=None, special_flags=0) 
+            # pygame.Surface.blit(source, dest, area=None, special_flags=0)
             screen.blit(labels[i + (j*3)], (x, y))
 
-    # pygame.Rect(left, top, width, height) 
-    
+    # pygame.Rect(left, top, width, height)
+
+
 """ Draw status bar at the bottom of the board
 Reflects the current status of the game
 """
@@ -107,17 +110,20 @@ def drawStatus(screen):
 
 """ Returns the mouse position based on which cell in the 3x3 board it belongs to 
 
-       0 100 200 300 400 500 (px)
-100      1    |   2   |   3  
-         --------------------
-300      4    |   5   |   6  
-         --------------------
-500      7    |   8   |   9 
+Cell positions (numbers are middle of symbols, not the pos of labels)
+
+       0 100 200 300 400 500 600 (px)
+100    |  1   |   2   |   3   |
+        ----------------------
+300    |  4   |   5   |   6   |
+        ----------------------
+500    |  7   |   8   |   9   |
+(px)
 """
 
 
 def boardPos(mouseX, mouseY):
-    # Row, Column of cell mouse clicked on
+    # Row, Column of cell the mouse clicked on
     row = 0
     col = 0
 
@@ -155,15 +161,13 @@ def drawMove(screen, boardRow, boardCol, move):
         pygame.draw.circle(screen, symbolColor, (centerX, centerY), 80, 2)
     else:
         offset = 60
-        pygame.draw.line(screen,
-                         symbolColor,
-                         (centerX - offset, centerY - offset), # bottom left
-                         (centerX + offset, centerY + offset), # top right 
+        pygame.draw.line(screen, symbolColor,
+                         (centerX - offset, centerY - offset),  # bottom left
+                         (centerX + offset, centerY + offset),  # top right
                          3)
-        pygame.draw.line(screen,
-                         symbolColor,
-                         (centerX - offset, centerY + offset), # top left
-                         (centerX + offset, centerY - offset), # bottom right
+        pygame.draw.line(screen, symbolColor,
+                         (centerX - offset, centerY + offset),  # top left
+                         (centerX + offset, centerY - offset),  # bottom right
                          3)
 
 
